@@ -5,7 +5,7 @@
   "main": "lib/index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/unchained-capital/unchained-wallets.git"
+    "url": "git+https://github.com/hackable/unchained-wallets.git"
   },
   "author": "Unchained Capital",
   "license": "MIT",
