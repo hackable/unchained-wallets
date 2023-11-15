@@ -100,10 +100,12 @@ const ENV_TREZOR_BLOCKBOOK_URL =
   env_variables.REACT_APP_TREZOR_BLOCKBOOK_URL ||
   env_variables.VITE_TREZOR_BLOCKBOOK_URL;
 
+const WINDOW_LOCATION_HOSTNAME = (typeof window !== "undefined") ? window.location.hostname : 'localhost';
+
 const TREZOR_CONNECT_URL =
-  ENV_TREZOR_CONNECT_URL || `https://${window.location.hostname}:8088/`;
+  ENV_TREZOR_CONNECT_URL || `https://${WINDOW_LOCATION_HOSTNAME}:8088/`;
 const TREZOR_BLOCKBOOK_URL =
-  ENV_TREZOR_BLOCKBOOK_URL || `http://${window.location.hostname}:3035/`;
+  ENV_TREZOR_BLOCKBOOK_URL || `http://${WINDOW_LOCATION_HOSTNAME}:3035/`;
 
 const TREZOR_DEV =
   env_variables.TREZOR_DEV ||
