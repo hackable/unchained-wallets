@@ -63,7 +63,6 @@ export const LEDGER = "ledger";
 
 export const LEDGER_V2 = "ledger_v2";
 
-import TransportU2F from "@ledgerhq/hw-transport-u2f";
 import TransportWebUSB from "@ledgerhq/hw-transport-webusb";
 import LedgerBtc from "@ledgerhq/hw-app-btc";
 
@@ -171,19 +170,6 @@ export class LedgerInteraction extends DirectKeystoreInteraction {
    * }
    */
   async withTransport(callback: (transport: any) => any) {
-    const useU2F = this.environment.satisfies({
-      firefox: ">70",
-    });
-
-    if (useU2F) {
-      try {
-        const transport = await TransportU2F.create();
-        return callback(transport);
-      } catch (err: unknown) {
-        const e = err as DeviceError;
-        throw new Error(e.message);
-      }
-    }
 
     try {
       const transport = await TransportWebUSB.create();
@@ -1291,7 +1277,7 @@ export class LedgerSignMessage extends LedgerBitcoinInteraction {
         // signature?
         transport.setExchangeTimeout(20000);
 
-        const vrs = await app.signMessageNew(this.bip32Path, this.message);
+        const vrs = await app.signMessage(this.message, this.bip32Path);
 
         return vrs;
       } finally {
